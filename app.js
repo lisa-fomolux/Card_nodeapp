@@ -58,9 +58,22 @@ app.get('/', (req, res)=>{
 
 app.use('/cards', require('./routes/cards') )
 
-const PORT=process.env.PORT || 9001;
-const http=require('http');
-const server=http.createServer(app)
-server.listen(PORT, ()=>{
-    console.log('server running at port *'+PORT);
-})
+// const PORT=process.env.PORT || 9001;
+// const http=require('http');
+// const server=http.createServer(app)
+// server.listen(PORT, ()=>{
+//     console.log('server running at port *'+PORT);
+// })
+
+const http = require('http');
+const port = process.env.PORT || 9001;
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/html');
+  res.end('<h1>Hello World</h1>');
+});
+
+server.listen(port,() => {
+  console.log(`Server running at port `+port);
+});
