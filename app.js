@@ -6,7 +6,8 @@ const path=require('path');
 const app=express();
 mongoose.connect('mongodb+srv://lisa:117599@clustermern.k6f8p.mongodb.net/房卡管理?retryWrites=true&w=majority', {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true
 })
 // app.use(cors())
 app.use(express.static(path.join(__dirname, 'build')))
@@ -20,12 +21,7 @@ app.use(express.json())
 const buildPath = path.join(__dirname, '..', 'build');
 app.use(express.static(buildPath));
 
-// app.use('/cards', require('./routes/cards') )
-app.get('/', (req, res)=>{
-    Card.find()
-    .then(data=>res.json(data))
-    .catch(err=>console.log(err))
-})
+app.use('/cards', require('./routes/cards') )
 
 const PORT=process.env.PORT || 9001;
 app.listen(PORT, ()=>{

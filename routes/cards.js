@@ -16,12 +16,6 @@ router.post('/list', (req, res)=>{
     .catch(err=>res.status(404).json({nofound: 'no data founded'}))
 })
 
-router.get('/', (req, res)=>{
-    Card.find()
-    .then(data=>res.json(data))
-    .catch(err=>console.log(err))
-})
-
 router.post('/create', (req, res)=>{
     Card.create(req.body)
     .then(data=>{
